@@ -64,5 +64,12 @@
         </plugin>
   	</plugins>
   </build>
+  
+  
+  <scm>
+	<connection>scm:git:git@github.com:gmolyneux/PDFCombiner.git</connection>
+	<url>scm:git:git@github.com:gmolyneux/PDFCombiner.git</url>
+	<developerConnection>scm:git:git@github.com:gmolyneux/PDFCombiner.git</developerConnection>
+  </scm>
           
 </project>
