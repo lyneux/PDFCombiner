@@ -67,9 +67,9 @@
   
   
   <scm>
-	<connection>scm:git:git@github.com:gmolyneux/PDFCombiner.git</connection>
-	<url>https://github.com/gmolyneux/PDFCombiner</url>
-	<developerConnection>scm:git:git@github.com:gmolyneux/PDFCombiner.git</developerConnection>
+	<connection>scm:git:git@github.com:lyneux/PDFCombiner.git</connection>
+	<url>https://github.com/lyneux/PDFCombiner</url>
+	<developerConnection>scm:git:git@github.com:lyneux/PDFCombiner.git</developerConnection>
   </scm>
           
 </project>
