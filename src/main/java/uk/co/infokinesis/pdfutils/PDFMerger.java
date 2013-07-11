@@ -12,6 +12,7 @@ import java.util.List;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -44,9 +45,10 @@ public class PDFMerger {
     
 	}
 	
-	
+    
 	/**
      * Merge multiple pdf into one pdf
+     * 
      * 
      * @param list
      *            of pdf input stream
@@ -55,26 +57,30 @@ public class PDFMerger {
      * @throws DocumentException
      * @throws IOException
      */
-    public static void doMerge(List<InputStream> list, OutputStream outputStream)
+    public void doMerge(List<InputStream> list, OutputStream outputStream)
             throws DocumentException, IOException {
+    	
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, outputStream);
+        
+        PdfCopy cp = new PdfCopy(document, outputStream);
+        
         document.open();
-        PdfContentByte cb = writer.getDirectContent();
         
         for (InputStream in : list) {
-            PdfReader reader = new PdfReader(in);
-            for (int i = 1; i <= reader.getNumberOfPages(); i++) {
-                document.newPage();
-                //import the page from source pdf
-                PdfImportedPage page = writer.getImportedPage(reader, i);
-                //add the page to the destination pdf
-                cb.addTemplate(page, 0, 0);
+        	
+            PdfReader r = new PdfReader(in);
+            for (int k = 1; k <= r.getNumberOfPages(); ++k) {
+                cp.addPage(cp.getImportedPage(r, k));
             }
+            cp.freeReader(r);
+
         }
         
-        outputStream.flush();
+        cp.close();
         document.close();
-        outputStream.close();
+        
     }
+    
+    
+    
 }
